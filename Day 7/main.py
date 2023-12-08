@@ -29,7 +29,7 @@ def get_type(cards: str, part = 1):
         elif (mx == 3 or counts.count(2) == 2) and num_jacks == 1:
             counts = [3, 2]
         else:
-            counts[counts.index(max(counts))] += num_jacks
+            counts[counts.index(mx)] += num_jacks
     else:
         counts: List[int] = list(dict(Counter(cards)).values())
     return {
@@ -51,11 +51,9 @@ def cmp_hand(a: tuple[str, int], b: tuple[str, int], part = 1) -> int:
 
 
 # Part 1
-print(f'Part 1: {sum([v[1] * (i + 1) for i, v in enumerate(sorted(hands, key=functools.cmp_to_key(cmp_hand)))])}')
+print(f'Part 1: {sum(v[1] * (i + 1) for i, v in enumerate(sorted(hands, key=functools.cmp_to_key(cmp_hand))))}')
 
 
 # Part 2
 print(f'Part 2: {sum([v[1] * (i + 1) for i, v in enumerate(sorted(hands, key=functools.cmp_to_key(lambda a, b: cmp_hand(a, b, part=2))))])}')
-
-
 
