@@ -10,6 +10,6 @@ def extrapolate(seq: List[int], idx: int, direction: int) -> int:
     return 0 if all(diff == 0 for diff in seq) else seq[idx] + direction * extrapolate(diffs, idx, direction)
 
 
-print(f'Part 1: {sum(extrapolate(i, idx=-1, direction=1) for i in data)}')
-print(f'Part 2: {sum(extrapolate(i, idx=0, direction=-1) for i in data)}')
+print(f'Part 1: {sum(map(lambda i: extrapolate(i, idx=-1, direction=1), data))}')
+print(f'Part 2: {sum(map(lambda i: extrapolate(i, idx=0, direction=-1), data))}')
 
