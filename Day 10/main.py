@@ -1,5 +1,5 @@
 import math
-from typing import List, Tuple, Set, Dict
+from typing import List, Tuple, Dict
 
 
 with open('input.txt') as file:
