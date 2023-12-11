@@ -1,13 +1,13 @@
 import math
 import re
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
 
 with open('input.txt') as file:
     instructions, _, *_paths = file.readlines()
     paths: Dict[str, Tuple] = {}
     for line in _paths:
         key, _val = re.match(r'(\w+) = \((.+)\)', line).groups()
-        val: Tuple = tuple(_val.split(', '))
+        val: Tuple[str] = tuple(_val.split(', '))
         paths[key] = val
 
 
@@ -30,12 +30,11 @@ print(f'Part 1: {steps}')
 # Part 2
 idx: int = 0
 keys = [i for i in paths if i.endswith('A')]
-required_steps = []
-
+required_steps: List[int] = []
 for position in keys:
     steps: int = 0
     while not position.endswith('Z'):
-        position = paths[position][path_converter.get(instructions[idx])]
+        position: str = paths[position][path_converter.get(instructions[idx])]
         idx += 1
         if idx >= n - 1:
             idx = 0
