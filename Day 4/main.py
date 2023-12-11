@@ -4,6 +4,7 @@ from typing import List
 with open('input.txt') as file:
     cards: List[str] = file.readlines()
 
+
 def calculate_card(_card: str) -> int:
     winning, nums = (
         {int(n) for n in _nums.split()} for _nums in re.match(r'Card *\d+: ([\d ]+) \| ([\d ]+)', _card).groups()
