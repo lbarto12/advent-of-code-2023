@@ -1,9 +1,10 @@
 import functools
 from collections import Counter
-from typing import List
+from typing import List, Tuple
 
 with open('input.txt') as file:
-    hands = list(map(lambda x: (x[0], int(x[1])), [i.split() for i in file.readlines()]))
+    hands: List[Tuple[str, int]] = list(map(lambda x: (x[0], int(x[1])), [i.split() for i in file.readlines()]))
+
 
 class HandType:
     FIVE = 6
@@ -19,9 +20,9 @@ def cmp_card(_card: str, part = 1) -> int:
         "T": 10, "J": 11 if part == 1 else 1, "Q": 12, "K": 13, "A": 14,
     }.get(_card) or int(_card)
 
-def get_type(cards: str, part = 1):
+def get_type(cards: str, part: int = 1) -> int:
     num_jacks: int = cards.count('J')
-    if num_jacks and part == 2:
+    if part == 2 and num_jacks:
         counts: List[int] = list(dict(Counter(cards.replace('J', ''))).values())
         mx: int = max(counts) if counts else 0
         if num_jacks + mx >= 4:
@@ -43,7 +44,6 @@ def cmp_hand(a: tuple[str, int], b: tuple[str, int], part = 1) -> int:
     a_val, b_val = get_type(a[0], part), get_type(b[0], part)
     if a_val != b_val:
         return a_val - b_val
-
     for i in range(5):
         diff: int = cmp_card(a[0][i], part) - cmp_card(b[0][i], part)
         if diff != 0:
@@ -51,9 +51,10 @@ def cmp_hand(a: tuple[str, int], b: tuple[str, int], part = 1) -> int:
 
 
 # Part 1
-print(f'Part 1: {sum(v[1] * (i + 1) for i, v in enumerate(sorted(hands, key=functools.cmp_to_key(cmp_hand))))}')
+ranks: List[Tuple[str, int]] = sorted(hands, key=functools.cmp_to_key(cmp_hand))
+print(f'Part 1: {sum(v[1] * (i + 1) for i, v in enumerate(ranks))}')
 
 
 # Part 2
-print(f'Part 2: {sum([v[1] * (i + 1) for i, v in enumerate(sorted(hands, key=functools.cmp_to_key(lambda a, b: cmp_hand(a, b, part=2))))])}')
-
+ranks: List[Tuple[str, int]] = sorted(hands, key=functools.cmp_to_key(lambda a, b: cmp_hand(a, b, part=2)))
+print(f'Part 2: {sum(v[1] * (i + 1) for i, v in enumerate(ranks))}')
