@@ -25,17 +25,18 @@ def after_expansion(coord: Tuple[int, int], expansion: int) -> Tuple[int, int]:
     ey: int = [galaxies[i][x] for i in range(n - (n - y))].count('E')
     return x + ex * (expansion - 1), y + ey * (expansion - 1)
 
+def solve(exp: int) -> int:
+    coords: List[Tuple[int, int]] = \
+        [after_expansion((x, y), exp) for y, row in enumerate(galaxies) for x, val in enumerate(row) if val == '#']
+    return sum(min_path(c1, c2) for i, c1 in enumerate(coords) for c2 in coords[i + 1:])
+
 
 # Part 1:
-coords: List[Tuple[int, int]] = \
-    [after_expansion((x, y), 2) for y, row in enumerate(galaxies) for x, val in enumerate(row) if val == '#']
-print(f'Part 1: {sum(min_path(c1, c2) for i, c1 in enumerate(coords) for c2 in coords[i + 1:])}')
+print(f'Part 1: {solve(2)}')
 
 
 # Part 2:
-coords: List[Tuple[int, int]] = \
-    [after_expansion((x, y), 1_000_000) for y, row in enumerate(galaxies) for x, val in enumerate(row) if val == '#']
-print(f'Part 2: {sum(min_path(c1, c2) for i, c1 in enumerate(coords) for c2 in coords[i + 1:])}')
+print(f'Part 2: {solve(1_000_000)}')
 
 
 
