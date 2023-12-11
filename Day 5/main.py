@@ -1,15 +1,9 @@
-from typing import Dict, List
+from typing import List, Tuple
 
-def split_maps(lst: List[str]) -> List[List[List[int]]]:
-    res = []
-    for line in lst:
-        if line == "\n":
-            continue
-        if line[0].isalpha():
-            res.append([])
-        else:
-            res[-1].append([int(i) for i in line.split()])
-    return res
+
+with open('input.txt') as file:
+    mappings: List[str] = file.readlines()
+
 
 class Mapping:
     def __init__(self, args):
@@ -22,9 +16,10 @@ class Mapping:
     def get_mapped(self, target: int) -> int:
         return target + self.offset if self.is_mapped(target) else target
 
+
 class MappedLevel:
-    def __init__(self, level: List[List[int]]):
-        self.level = [Mapping(i) for i in level]
+    def __init__(self, _level: List[List[int]]):
+        self.level: List[Mapping] = [Mapping(i) for i in _level]
 
     def get_mapped(self, target: int) -> int:
         for mapping in self.level:
@@ -33,11 +28,20 @@ class MappedLevel:
         return target
 
 
-with open('input.txt') as file:
-    _read = file.readlines()
-    seeds: List[int] = [int(i) for i in filter(lambda x: x.isnumeric(), _read.pop(0).split())]
-    almanac_read: List[List[List[int]]] = split_maps(_read)
-    almanac: List[MappedLevel] = [MappedLevel(i) for i in almanac_read]
+def split_maps(lst: List[str]) -> List[List[List[int]]]:
+    res: List[List[List[int]]] = []
+    for line in lst:
+        if line == "\n":
+            continue
+        if line[0].isalpha():
+            res.append([])
+        else:
+            res[-1].append([int(i) for i in line.split()])
+    return res
+
+
+seeds: List[int] = [int(i) for i in filter(lambda x: x.isnumeric(), mappings.pop(0).split())]
+almanac: List[MappedLevel] = [MappedLevel(i) for i in split_maps(mappings)]
 
 
 # Part 1
@@ -51,14 +55,12 @@ print(f'Part 1: {min(seeds_copy)}')
 
 
 # Part 2
-seed_ranges = [(seeds[i], seeds[i] + seeds[i + 1]) for i in range(0, len(seeds), 2)]
-
+seed_ranges: List[Tuple[int, int]] = [(seeds[i], seeds[i] + seeds[i + 1]) for i in range(0, len(seeds), 2)]
 for level in almanac:
-    maps = level.level
-    new = []
+    new: List[Tuple[int, int]] = []
     while seed_ranges:
         mn, mx = seed_ranges.pop(0)
-        for mp in maps:
+        for mp in level.level:
             start, end = max(mn, mp.source), min(mx, mp.source + mp.range)
             if start < end:
                 new.append((start + mp.offset, end + mp.offset))
@@ -72,8 +74,4 @@ for level in almanac:
     seed_ranges = new
 
 print(f'Part 2: {min(i[0] for i in seed_ranges)}')
-
-
-
-
 
