@@ -4,14 +4,14 @@ from typing import List, Tuple
 with open('input.txt') as file:
     galaxies: List[List[chr]] = [list(filter(lambda x: x != "\n", [j for j in i])) for i in file.readlines()]
 
-    for i in range(len(galaxies)):
-        if all(c == '.' for c in galaxies[i]):
+    for i, _row in enumerate(galaxies):
+        if all(c == '.' for c in _row):
             galaxies[i] = ['E'] * len(galaxies[0])
 
     for i in range(len(galaxies[0])):
-        if all(galaxies[j][i] in '.E' for j in range(len(galaxies))):
-            for j in range(len(galaxies)):
-                galaxies[j][i] = 'E'
+        if all(galaxy[i] in '.E' for galaxy in galaxies):
+            for galaxy in galaxies:
+                galaxy[i] = 'E'
 
 
 def min_path(a: Tuple[int, int], b: Tuple[int, int]) -> int:
