@@ -20,9 +20,8 @@ def min_path(a: Tuple[int, int], b: Tuple[int, int]) -> int:
 
 def after_expansion(coord: Tuple[int, int], expansion: int) -> Tuple[int, int]:
     x, y = coord
-    n = len(galaxies)
     ex: int = galaxies[y][:x].count('E')
-    ey: int = [galaxies[i][x] for i in range(n - (n - y))].count('E')
+    ey: int = [galaxies[i][x] for i in range(y)].count('E')
     return x + ex * (expansion - 1), y + ey * (expansion - 1)
 
 def solve(exp: int) -> int:
