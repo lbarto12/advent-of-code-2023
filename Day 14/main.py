@@ -74,6 +74,6 @@ for i in range(1000000000):
 
 
 
-print(f'Part 2 {get_load(p2_dish)}')
+print(f'Part 2: {get_load(p2_dish)}')
 
 
