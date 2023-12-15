@@ -29,5 +29,5 @@ for op in sequence:
             del boxes[hsh][s]
 
 print(f'Part 2: '
-      f'{sum(sum((m + 1) * v * (i + 1) for i, v in enumerate(box.values())) for m, box in enumerate(boxes.values()))}')
+      f'{sum(sum(m * v * i for i, v in enumerate(box.values(), 1)) for m, box in enumerate(boxes.values(), 1))}')
 
