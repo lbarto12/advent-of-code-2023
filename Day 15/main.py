@@ -7,7 +7,7 @@ with open('input.txt') as file:
 def _hash(_s: str):
     h: int = 0
     for i in _s:
-        h = ((h + ord(i)) * 17) % 256
+        h = (h + ord(i)) * 17 % 256
     return h
 
 
@@ -19,10 +19,10 @@ print(f'Part 1: {sum(_hash(i) for i in sequence)}')
 boxes: Dict[int, Dict[str, int]] = {i: {} for i in range(256)}
 
 for op in sequence:
-    if '=' in op:
+    if op[-2] == '=':
         s, v = op.split('=')
         boxes[_hash(s)][s] = int(v)
-    elif '-' in op:
+    elif op[-1] == '-':
         s: str = op[:-1]
         hsh: int = _hash(s)
         if s in boxes[hsh]:
