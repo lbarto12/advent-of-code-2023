@@ -1,4 +1,4 @@
-from typing import List, Dict, Tuple
+from typing import List, Dict
 
 with open('input.txt') as file:
     sequence: List[str] = file.read().split(',')
