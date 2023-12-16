@@ -7,13 +7,13 @@ with open('input.txt') as file:
 # Part 1
 sm: int = 0
 limits: Dict[str, int] = {"red": 12, "green": 13, "blue": 14}
-for game_id, game in enumerate(games):
+for game_id, game in enumerate(games, 1):
     valid: bool = True
     for color, limit in limits.items():
         all_draws: List[str] = re.findall(rf'(\d+) {color}', game)
         if any(int(i) > limit for i in all_draws):
             valid = False
-    sm += valid * (game_id + 1)
+    sm += valid * game_id
 
 print(f'Part 1: {sm}')
 

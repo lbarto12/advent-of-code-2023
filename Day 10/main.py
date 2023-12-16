@@ -46,7 +46,7 @@ print(f'Part 1: {math.ceil(steps / 2)}')
 # Part 2
 def calculate_area(coordinates: List[Tuple[int, int]]) -> float:
     return abs(
-        sum(a * coordinates[i - 1][1] - coordinates[i - 1][0] * b for i, (a, b) in enumerate(coordinates))
+        sum(a * coordinates[i][1] - coordinates[i][0] * b for i, (a, b) in enumerate(coordinates, -1))
     ) / 2
 
 

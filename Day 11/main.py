@@ -26,7 +26,7 @@ def after_expansion(coord: Tuple[int, int], expansion: int) -> Tuple[int, int]:
 def solve(exp: int) -> int:
     coords: List[Tuple[int, int]] = \
         [after_expansion((x, y), exp) for y, row in enumerate(galaxies) for x, val in enumerate(row) if val == '#']
-    return sum(min_path(c1, c2) for i, c1 in enumerate(coords) for c2 in coords[i + 1:])
+    return sum(min_path(c1, c2) for i, c1 in enumerate(coords, 1) for c2 in coords[i:])
 
 
 # Part 1:

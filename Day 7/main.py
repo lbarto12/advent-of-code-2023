@@ -52,9 +52,9 @@ def cmp_hand(a: tuple[str, int], b: tuple[str, int], part = 1) -> int:
 
 # Part 1
 ranks: List[Tuple[str, int]] = sorted(hands, key=functools.cmp_to_key(cmp_hand))
-print(f'Part 1: {sum(v[1] * (i + 1) for i, v in enumerate(ranks))}')
+print(f'Part 1: {sum(v[1] * i for i, v in enumerate(ranks, 1))}')
 
 
 # Part 2
 ranks: List[Tuple[str, int]] = sorted(hands, key=functools.cmp_to_key(lambda a, b: cmp_hand(a, b, part=2)))
-print(f'Part 2: {sum(v[1] * (i + 1) for i, v in enumerate(ranks))}')
+print(f'Part 2: {sum(v[1] * i for i, v in enumerate(ranks, 1))}')

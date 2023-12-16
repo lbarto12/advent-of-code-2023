@@ -72,8 +72,6 @@ for i in range(1000000000):
     cycle(p2_dish)
     seen.append(dx)
 
-
-
 print(f'Part 2: {get_load(p2_dish)}')
 
 

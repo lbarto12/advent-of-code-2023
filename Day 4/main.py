@@ -18,9 +18,9 @@ print(f'Part 1: {sum(int((1 << calculate_card(card)) / 2) for card in cards)}')
 
 # Part 2
 counts: List[int] = [1] * len(cards)
-for i, card in enumerate(cards):
-    for j in range(i + 1, i + calculate_card(card) + 1):
-        counts[j] += counts[i]
+for i, card in enumerate(cards, 1):
+    for j in range(i, i + calculate_card(card)):
+        counts[j] += counts[i - 1]
 
 print(f'Part 2: {sum(counts)}')
 

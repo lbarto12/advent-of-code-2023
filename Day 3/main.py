@@ -12,10 +12,10 @@ def get_directions(x_offset: int, y_offset: int) -> Tuple[int, int]:
 
 
 valid_map: List[List[int]] = [[0 for _ in range(len(engine_map[0]))] for _ in range(len(engine_map))]
-for i, row in enumerate(engine_map[1:-1]):
-    for j, char in enumerate(row[1:-1]):
+for i, row in enumerate(engine_map[1:-1], 1):
+    for j, char in enumerate(row[1:-1], 1):
         if not (char == "." or char.isnumeric()):
-            for x, y in get_directions(j + 1, i + 1):
+            for x, y in get_directions(j, i):
                 valid_map[y][x] = 1
 
 current_number: str = '0'

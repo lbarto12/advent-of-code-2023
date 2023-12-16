@@ -6,7 +6,7 @@ with open('input.txt') as file:
 
 
 def extrapolate(seq: List[int], idx: int, direction: int) -> int:
-    diffs: List[int] = [seq[i + 1] - num for i, num in enumerate(seq[:-1])]
+    diffs: List[int] = [seq[i] - num for i, num in enumerate(seq[:-1], 1)]
     return 0 if all(diff == 0 for diff in seq) else seq[idx] + direction * extrapolate(diffs, idx, direction)
 
 
