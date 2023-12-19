@@ -10,7 +10,7 @@ def array_diff(a: List[chr], b: List[chr]) -> int:
 
 def find_incidence(_map: List[List[str]]) -> int:
     n: int = len(_map)
-    for i in range(1, len(_map)):
+    for i in range(1, n):
         slc: int = min(i, n - i)
         if _map[i - slc:i][::-1] == _map[i:i + slc]:
             return i

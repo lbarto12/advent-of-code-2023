@@ -6,8 +6,8 @@ with open('input.txt') as file:
     records: List[Tuple[int, int]] = list(zip(*[[int(n) for n in i.split()[1:]] for i in raw_records]))
 
 
-def quadratic(b, c):
-    return (-b + (b ** 2 - 4 * c) ** 0.5) / 2, (-b - (b ** 2 - 4 * c) ** 0.5) / 2
+def quadratic(_b, _c):
+    return (-_b + (_b ** 2 - 4 * _c) ** 0.5) / 2, (-_b - (_b ** 2 - 4 * _c) ** 0.5) / 2
 
 
 # Part 1

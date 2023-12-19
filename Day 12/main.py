@@ -20,6 +20,7 @@ def num_possible(_line: str, *patterns: re.Pattern) -> int:
     return matches
 
 
+# Part 1
 sm: int = 0
 for line, record in springs:
     sm += num_possible(f'.{line}.', *[re.compile(f"[.?][#?]{{{i}}}[.?]") for i in record])

@@ -3,6 +3,7 @@ from typing import List, Tuple
 
 with open('input.txt') as file:
     mappings: List[str] = file.readlines()
+    seeds: List[int] = [int(i) for i in filter(lambda x: x.isnumeric(), mappings.pop(0).split())]
 
 
 class Mapping:
@@ -40,7 +41,6 @@ def split_maps(lst: List[str]) -> List[List[List[int]]]:
     return res
 
 
-seeds: List[int] = [int(i) for i in filter(lambda x: x.isnumeric(), mappings.pop(0).split())]
 almanac: List[MappedLevel] = [MappedLevel(i) for i in split_maps(mappings)]
 
 

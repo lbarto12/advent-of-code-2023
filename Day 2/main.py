@@ -13,6 +13,7 @@ for game_id, game in enumerate(games, 1):
         all_draws: List[str] = re.findall(rf'(\d+) {color}', game)
         if any(int(i) > limit for i in all_draws):
             valid = False
+            break
     sm += valid * game_id
 
 print(f'Part 1: {sm}')
