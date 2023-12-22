@@ -8,8 +8,6 @@ with open('input.txt') as file:
 def merge_tuple(a: Tuple[int, int], b: Tuple[int, int]):
     return a[0] + b[0], a[1] + b[1]
 
-
-# Part 1
 def solve(_start: Tuple[int, int], max_steps: int):
     queue: List[Tuple[int, Tuple[int, int]]] = [(0, _start)]
     seen: Set[Tuple[int, int]] = set()
@@ -22,12 +20,10 @@ def solve(_start: Tuple[int, int], max_steps: int):
 
         if pos in seen:
             continue
+        seen.add(pos)
 
         if steps % 2 == offset:
             ans += 1
-
-        seen.add(pos)
-
         if steps == max_steps:
             continue
 
@@ -39,6 +35,7 @@ def solve(_start: Tuple[int, int], max_steps: int):
     return ans
 
 
+# Part 1
 start: Tuple[int, int] = (len(garden[0]) // 2, len(garden) // 2)
 
 print(f'Part 1: {solve(start, 64)}')
@@ -61,6 +58,4 @@ large_corners: int = \
     WIDTH * explore_all([(0, size - 1), (size - 1, size - 1), (0, 0), (size - 1, 0)], size * 3 // 2 - 1)
 
 print(f"Part 2: {full_tiles + last_outer + small_corners + large_corners}")
-
-
 
